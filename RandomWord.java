@@ -5,55 +5,56 @@
  */
 package hangmanproject;
 
+import java.util.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 /**
  *
  * @author CARLOSPARLOUR
  */
 public class RandomWord {
-    String word;
+    //this declares all the variables used in the class
     String[] myStringArray = new String[55000];
-    String type;    
+    //String type;
+    int choice;
 
-    public RandomWord(String name) {
-        type = name;
+    public RandomWord(int input) {
+        choice = input;
     }
 
-    public String word(){
-        return type;
-    }
-    
-    
-    public String choice() {
-        String choice = type.toLowerCase();
-        //System.out.println(choice);
-        //This still needs to make all of choice LOWERCASE
-        if (choice == "cars") {
+    //This is Method will take in the input of the user and it will find the location of the file and it will play the all of those words in an array
+    public void Display() {
+        String word = "";
 
-            word = "/Users/CARLOSPARLOUR/NetBeansProjects/HangmanProject/src/hangmanproject/carFile.txt";
+        //int day = 1;
+        switch (choice) {
+            case 1:
+                word = "/Users/CARLOSPARLOUR/NetBeansProjects/HangmanProject/src/hangmanproject/carFile.txt";
+                System.out.println("You have choosen Cars, there ae 42 choices GOOD LICK!!");
+                break;
+            case 2:
+                word = "/Users/CARLOSPARLOUR/NetBeansProjects/HangmanProject/src/hangmanproject/presidentFile.txt";
+                System.out.println("You have choosen Presidents, there are 45 possible choices GOOD LUCK!!");
+                break;
+            case 3:
+                word = "/Users/CARLOSPARLOUR/NetBeansProjects/HangmanProject/src/hangmanproject/dictionaryHangman.txt";
+                System.out.println("There are 46,000 possible choices GOOD LUCK!!");
+                break;
 
-        } else if (choice == "president") {
-
-            word = "/Users/CARLOSPARLOUR/NetBeansProjects/HangmanProject/src/hangmanproject/presidentFile.txt";
-
-        } else if (choice == "random") {
-
-            word = "/Users/CARLOSPARLOUR/NetBeansProjects/HangmanProject/src/hangmanproject/dictionaryHangman.txt";
+            default:
+                word = "/Users/CARLOSPARLOUR/NetBeansProjects/HangmanProject/src/hangmanproject/dictionaryHangman.txt";
+                System.out.println("Your Pick was invalid so we picked for you! There are 46,000 possible choices GOOD LUCK!!");
+                break;
         }
 
-        return word;
-
-    }
-
-    //This is Method will verify the 
-    public void Display(String Name) {
-
+        //used to debug the program so we can make sure the output is correct
+        //System.out.println( word + "This is before it statrs to read the file");
         Scanner fileIn = null;
         try {
-            fileIn = new Scanner(new File(Name));
+            fileIn = new Scanner(new File(word));
         } catch (FileNotFoundException s) {
             System.out.println("File not Found");
             System.exit(0);
@@ -68,6 +69,8 @@ public class RandomWord {
             //System.out.println(line);
             i++;
         }
+
+        fileIn.close();
 
     }
 
