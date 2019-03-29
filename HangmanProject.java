@@ -21,85 +21,23 @@ public class HangmanProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String choice1 = "";
-        
-        System.out.println("Please choose a topic: Presidents, Cars or Random");
+        int choice1;
+
+        System.out.println("Please choose a topic: 1 for cars, 2 for presidents, 3 for a random topic."
+                + "\nIf your input is invalid we will choose a word for you!");
         Scanner sc1 = new Scanner(System.in);
-        
-//        choice1 = sc1.next();
-//        choice1 = choice1.toLowerCase();
-//        System.out.println(choice1);
-        choice1 = "president";
-        
+        choice1 = sc1.nextInt();
+        sc1.close();
+
         RandomWord randW = new RandomWord(choice1);
-        System.out.println(randW.word());
-        String word = randW.choice();
-        randW.Display(word);
+        randW.Display();
         String RandomChosenWord = randW.randomChoice();
-        System.out.println(RandomChosenWord);
-        
-        //
-//        String[] myStringArray = new String[55000];
-//        String rand_word;
-//        
-//        System.out.println("CHoose a topic");
-//        //This simulated a player choosing a file 
-//        String choice = "Random";
-//        String choosen = location(choice);
-//        System.out.println(choosen);
-//        
-//        
-//        //this is the part of the prgram that will verify the file exisit
-//        Scanner fileIn = null;
-//        try {
-//            fileIn = new Scanner(new File(choosen));
-//        } catch (FileNotFoundException s) {
-//            System.out.println("File not Found");
-//            System.exit(0);
-//        }
-//
-//        int i = 0;
-//        while (fileIn.hasNextLine()) {
-//            
-//            String line = fileIn.nextLine();
-//            myStringArray[i] = line;
-//            //System.out.println(line);
-//            i++;
-//        }
-//        
-//        //This part of the program will produce the random word
-//        rand_word = myStringArray[ (int)(Math.random() * myStringArray.length) ];
-//        while (rand_word == null){
-//             rand_word = myStringArray[ (int)(Math.random() * myStringArray.length) ];
-//        }
-//       
-        System.out.print("Random word is .... ");
+        System.out.println("Random word is .... " + RandomChosenWord+ " .. This line is for debugging purposes it wont show up once the game is ready to go.\n");
         
         
-//        System.out.println(rand_word);
-    
+        System.out.println("Now we are ready to play the game. "
+                + "You will have 6 attempts to choose the correct word.  ");
+
     }
-    
-    
-    //this is the funciton used to print out the correct location of the 
-//    public static String location(String choice){
-//        String word = "";
-//        //This still needs to make all of choice LOWERCASE
-//        if (choice == "cars"){
-//            
-//            word = "/Users/CARLOSPARLOUR/NetBeansProjects/HangmanProject/src/hangmanproject/carFile.txt";
-//        
-//        } else if (choice == "president"){
-//        
-//            word = "/Users/CARLOSPARLOUR/NetBeansProjects/HangmanProject/src/hangmanproject/presidentFile.txt";
-//            
-//        } else if (choice == "Random"){
-//            
-//            word = "/Users/CARLOSPARLOUR/NetBeansProjects/HangmanProject/src/hangmanproject/dictionaryHangman.txt";
-//        }
-//       
-//    
-//    return word;
-//    }
 
 }
