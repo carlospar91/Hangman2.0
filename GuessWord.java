@@ -17,8 +17,6 @@ public class GuessWord {
     int position = 0;
     int lettersLeft;
     char[] hidden;
-    char[] guessedLetters = new char[100];
-    List<Character> chars = new ArrayList<>();
     List<Character> alphabet = new ArrayList<>();
 
     public GuessWord(String word) {
@@ -29,8 +27,6 @@ public class GuessWord {
 
     public void Guessing() {
         Picture hangPic = new Picture();
-
-        //hangPic.hangmanImage(secretWord, attempts);
         spaces();
         createAlphabet();
         printListChar();
@@ -76,7 +72,7 @@ public class GuessWord {
             }
 
             boolean wordGUesseddd = true;
-            if (lettersLeft == 1) {
+            if (lettersLeft == 1 || lettersLeft == 2 ) {
                 for (int i = 0; i < secretWord.length(); i++) {
                     if (hidden[i] == '*') {
                         wordGUesseddd = false;
@@ -84,7 +80,7 @@ public class GuessWord {
                 }
             }
 
-            if ((wordGUesseddd == true && lettersLeft == 1) || lettersLeft == 0) {
+            if ((wordGUesseddd == true && (lettersLeft == 1)) ||(wordGUesseddd == true && lettersLeft == 2)  || lettersLeft == 0) {
                 lettersLeft = 0;
                 System.out.println("THis is the end.");
                 hangPic.hangmanImage(secretWord, attempts);
@@ -95,7 +91,7 @@ public class GuessWord {
 
         hangPic.hangmanImage(secretWord, attempts);
         printListChar();
-        System.out.println("This is the total number of attempts taken>>> : >>" + totalAttempt);
+        //System.out.println("This is the total number of attempts taken>>> : >>" + totalAttempt);
 
     }
 
@@ -121,15 +117,17 @@ public class GuessWord {
 
     public boolean listChar(char ch) {
         boolean ans = alphabet.contains(ch);
-        int index = ch - 97;
+        //System.out.print(ans);
+        int index = (ch - 97);
         if (ans) {
             System.out.println("The list contains " + ch);
-            alphabet.remove(index);
+            alphabet.set(index, '#');
             ans = true;
         } else {
             System.out.println("The list does not contains " + ch);
             ans = false;
             System.out.println("This guess already exisist!!");
+            
         }
         return ans;
     }
@@ -137,7 +135,6 @@ public class GuessWord {
     public void printListChar() {
 
         System.out.println("These are the letters you have remaining to choose from:");
-
         System.out.println(alphabet);
 
     }
