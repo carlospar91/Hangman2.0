@@ -39,13 +39,22 @@ public class GuessWord {
             hangPic.hangmanImage(secretWord, attempts);
             printListChar();
 
-            System.out.print("Enter a letter to guess the word: ");
+                        System.out.print("Enter a letter to guess the word: ");
             //User enters character
             Scanner scan2 = new Scanner(System.in);
             String letter = scan2.next();
+            
+            while (letter.length() > 1){ 
+            System.out.print(" Try again, invalid input: ");
+            //User enters character
+             scan2 = new Scanner(System.in);
+             letter = scan2.next();
+            }
+            
             letter = letter.toLowerCase();
             char letterOne = letter.charAt(0);
             alreadyexisit = listChar(letterOne);
+
 
             //verifies the the user inputs the correct value, This will not take in multiple values or non caracters, it will take in capital lettes
             while (letterOne < 97 || letterOne > 122 || letter.length() > 1 || alreadyexisit == false) {
@@ -72,7 +81,7 @@ public class GuessWord {
             }
 
             boolean wordGUesseddd = true;
-            if (lettersLeft == 1 || lettersLeft == 2 ) {
+            if (lettersLeft == 1 || lettersLeft == 2) {
                 for (int i = 0; i < secretWord.length(); i++) {
                     if (hidden[i] == '*') {
                         wordGUesseddd = false;
@@ -80,7 +89,7 @@ public class GuessWord {
                 }
             }
 
-            if ((wordGUesseddd == true && (lettersLeft == 1)) ||(wordGUesseddd == true && lettersLeft == 2)  || lettersLeft == 0) {
+            if ((wordGUesseddd == true && (lettersLeft == 1)) || (wordGUesseddd == true && lettersLeft == 2) || lettersLeft == 0) {
                 lettersLeft = 0;
                 System.out.println("THis is the end.");
                 hangPic.hangmanImage(secretWord, attempts);
@@ -118,16 +127,17 @@ public class GuessWord {
     public boolean listChar(char ch) {
         boolean ans = alphabet.contains(ch);
         //System.out.print(ans);
+
         int index = (ch - 97);
         if (ans) {
-            System.out.println("The list contains " + ch);
+            //System.out.println("Good Guess!! " + ch);
             alphabet.set(index, '#');
             ans = true;
         } else {
-            System.out.println("The list does not contains " + ch);
+            System.out.print(ch + "  has already been used!!!");
             ans = false;
-            System.out.println("This guess already exisist!!");
-            
+            //System.out.println("This guess already exisist!!");
+
         }
         return ans;
     }
@@ -166,6 +176,33 @@ public class GuessWord {
         alphabet.add('x');
         alphabet.add('y');
         alphabet.add('z');
+    }
+
+    public char stringLen(String input) {
+        char result = input.charAt(0);
+        //String letter;
+        if (input.length() > 1) {
+            System.out.print("Enter ONlY 1 letter!!!  ");
+            Scanner scan2 = new Scanner(System.in);
+            input = scan2.next();
+            input = input.toLowerCase();
+            stringLen(input);
+            //stringLen(letter);
+        } else if (input.length() == 1) {
+            result = input.charAt(0);
+        }
+
+        System.out.println(result);       
+        return result;
+
+    }
+    
+    
+    public void verifyFinished(){
+    
+    
+    
+    
     }
 
 }
