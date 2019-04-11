@@ -72,9 +72,9 @@ public class GuessWord {
             verifyFinished();
 
         }
-
+        System.out.println();
         hangPic.hangmanImage(secretWord, attempts);
-        printListChar();
+        //printListChar();
         //System.out.println("This is the total number of attempts taken>>> : >>" + totalAttempt);
 
     }
@@ -105,7 +105,7 @@ public class GuessWord {
 
         int index = (ch - 97);
         if (ans) {
-            //System.out.println("Good Guess!! " + ch);
+            System.out.println();
             alphabet.set(index, '#');
             ans = true;
         } else {
@@ -198,8 +198,8 @@ public class GuessWord {
 
         if ((wordGUesseddd == true && (lettersLeft == 1)) || (wordGUesseddd == true && lettersLeft == 2) || lettersLeft == 0) {
             lettersLeft = 0;
-            System.out.println("THis is the end.");
-            hangPic.hangmanImage(secretWord, attempts);
+            System.out.println("Great job you guessed the right word!");
+            //hangPic.hangmanImage(secretWord, attempts);
             getHidden();
             //break;
         }
