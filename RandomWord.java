@@ -16,37 +16,38 @@ import java.io.FileNotFoundException;
  * @author CARLOSPARLOUR
  */
 public class RandomWord {
+
     //this declares all the variables used in the class
-    String[] myStringArray = new String[55000];
-    //String type;
+    String[] myStringArray;
     int choice;
+    String word;
 
     public RandomWord(int input) {
         choice = input;
+        myStringArray = new String[55000];
     }
 
-    //This is Method will take in the input of the user and it will find the location of the file and it will play the all of those words in an array
+    //This is Method will take in the input of the user and it will find the location of the file 
+    //it will set word to the location of the file so the program can open the correct one
     public void Display() {
-        String word = "";
 
-        //int day = 1;
         switch (choice) {
             case 1:
-                word = "/Users/CARLOSPARLOUR/NetBeansProjects/HangmanProject/src/hangmanproject/carFile.txt";
-                System.out.println("You have choosen Cars, there ae 42 choices GOOD LICK!!");
+                word = "carFile.txt";
+                System.out.println("\nYou have choosen Cars, there are 42 choices GOOD LUCK!!");
                 break;
             case 2:
-                word = "/Users/CARLOSPARLOUR/NetBeansProjects/HangmanProject/src/hangmanproject/presidentFile.txt";
-                System.out.println("You have choosen Presidents, there are 45 possible choices GOOD LUCK!!");
+                word = "presidentFile.txt";
+                System.out.println("\nYou have choosen Presidents, there are 45 possible choices GOOD LUCK!!");
                 break;
             case 3:
-                word = "/Users/CARLOSPARLOUR/NetBeansProjects/HangmanProject/src/hangmanproject/dictionaryHangman.txt";
-                System.out.println("There are 46,000 possible choices GOOD LUCK!!");
+                word = "dictionaryHangman.txt";
+                System.out.println("\nThere are 45,349 possible choices GOOD LUCK!!");
                 break;
 
             default:
-                word = "/Users/CARLOSPARLOUR/NetBeansProjects/HangmanProject/src/hangmanproject/dictionaryHangman.txt";
-                System.out.println("Your Pick was invalid so we picked for you! There are 46,000 possible choices GOOD LUCK!!");
+                word = "dictionaryHangman.txt";
+                System.out.println("\nYour Pick was invalid so we picked for you! There are 45,349 possible choices GOOD LUCK!!");
                 break;
         }
 
@@ -57,7 +58,7 @@ public class RandomWord {
             fileIn = new Scanner(new File(word));
         } catch (FileNotFoundException s) {
             System.out.println("File not Found");
-            System.exit(0);
+            //System.exit(0);
         }
 
         //while loop used to print out the contents of the file
@@ -69,19 +70,15 @@ public class RandomWord {
             //System.out.println(line);
             i++;
         }
-
-        fileIn.close();
-
     }
 
+    //this is the function that will randomly choose a word
     public String randomChoice() {
         String rand_word = myStringArray[(int) (Math.random() * myStringArray.length)];
         while (rand_word == null) {
             rand_word = myStringArray[(int) (Math.random() * myStringArray.length)];
         }
-
         return rand_word;
-
     }
 
 }
