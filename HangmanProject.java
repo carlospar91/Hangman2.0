@@ -18,22 +18,22 @@ public class HangmanProject {
     public static void main(String[] args) {
         letsPlay();
     }
-    
+
     //this is the main protion of the game play this is where we verify the input of th
     public static void letsPlay() {
-        
+
         Scanner sc1 = new Scanner(System.in);
         //initial value is set to Y so we can start the program. The while loop is used to see if the 
         //player still wants to play
         char cPlay = 'Y';
-        
+
         //while loop used to make sure the value 
         while (cPlay == 'Y') {
             int choice1 = 3;
             System.out.print("Please choose a topic: 1 for cars, 2 for presidents, 3 for a random topic.");
 
             try {
-                System.out.print("Please input an integer: ");
+                System.out.print(" Please input an integer: ");
                 //nextInt will throw InputMismatchException
                 choice1 = sc1.nextInt();
             } catch (InputMismatchException exception) {
@@ -66,7 +66,7 @@ public class HangmanProject {
 
     //this function will let tell verify if we play again. it will check the input to make sure that the 
     // is the correct answer
-    public static char playAgain(){
+    public static char playAgain() {
         Scanner sc1 = new Scanner(System.in);
         //char cPlay = c;
         System.out.print("Would you like to play again? Enter Y or N. ");
@@ -89,6 +89,5 @@ public class HangmanProject {
         }
         return cPlay;
     }
-    
-    
+
 }
