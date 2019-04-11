@@ -15,7 +15,7 @@ public class Picture {
         switch (attempts) {
             case 6:
                 //System.out.println(attempts);
-                System.out.println("This is where you start. ");
+                System.out.println();
                 System.out.println("   |");
                 System.out.println("   |");
                 System.out.println("   |");
@@ -56,7 +56,7 @@ public class Picture {
                 System.out.println("   |          _|_");
                 System.out.println("   |         /   \\");
                 System.out.println("   |        | O O |");
-                System.out.println("   |         \\_^ _/");
+                System.out.println("   |         \\_^_/");
                 System.out.println("   |");
                 System.out.println("   |");
                 System.out.println("   |");
@@ -68,7 +68,7 @@ public class Picture {
                 System.out.println("   |          _|_");
                 System.out.println("   |         /   \\");
                 System.out.println("   |        | O O |");
-                System.out.println("   |         \\_^ _/");
+                System.out.println("   |         \\_^_/");
                 System.out.println("   |           |");
                 System.out.println("   |           |");
                 System.out.println("   |");
@@ -80,7 +80,7 @@ public class Picture {
                 System.out.println("   |          _|_");
                 System.out.println("   |         /   \\");
                 System.out.println("   |        | O O |");
-                System.out.println("   |         \\_^ _/");
+                System.out.println("   |         \\_^_/");
                 System.out.println("   |           |");
                 System.out.println("   |           |");
                 System.out.println("   |          / \\ ");
@@ -92,7 +92,7 @@ public class Picture {
                 System.out.println("   |          _|_");
                 System.out.println("   |         /   \\");
                 System.out.println("   |        | O O |");
-                System.out.println("   |         \\_^ _/");
+                System.out.println("   |         \\_^_/");
                 System.out.println("   |          _|_");
                 System.out.println("   |         / | \\");
                 System.out.println("   |          / \\ ");
