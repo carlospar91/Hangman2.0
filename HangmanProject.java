@@ -16,60 +16,79 @@ public class HangmanProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        int choice1;
+        letsPlay();
+    }
+    
+    //this is the main protion of the game play this is where we verify the input of th
+    public static void letsPlay() {
+        
         Scanner sc1 = new Scanner(System.in);
+        //initial value is set to Y so we can start the program. The while loop is used to see if the 
+        //player still wants to play
+        char cPlay = 'Y';
+        
+        //while loop used to make sure the value 
+        while (cPlay == 'Y') {
+            int choice1 = 3;
+            System.out.print("Please choose a topic: 1 for cars, 2 for presidents, 3 for a random topic.");
+
+            try {
+                System.out.print("Please input an integer: ");
+                //nextInt will throw InputMismatchException
+                choice1 = sc1.nextInt();
+            } catch (InputMismatchException exception) {
+                //when the player inputs an inccorect input
+                System.out.println("Your input was not an Integer so we picked a word for you!");
+            }
+
+            mainGamePlay(choice1);
+            cPlay = playAgain();
+        }
+        System.out.println("Thank you for playing. This program has been closed gracefully.");
+    }
+
+    //this is the initial part of the program this it where we get the random word the player will need to guess. 
+    public static void mainGamePlay(int input) {
+        int choice1 = input;
         RandomWord randW;
-        String RandomChosenWord;
-        String playAgain;
-
-        System.out.print("Please choose a topic: 1 for cars, 2 for presidents, 3 for a random topic."
-                + "\nIf your input is invalid we will choose a word for you!  ");
-        choice1 = sc1.nextInt();
-
         randW = new RandomWord(choice1);
         randW.Display();
-        RandomChosenWord = randW.randomChoice();
-        System.out.println("\nRandom word is .... " + RandomChosenWord + " .. This line is for debugging purposes it wont show up once the game is ready to go.\n");
+        String RandomChosenWord = randW.randomChoice();
+        //String RandomChosenWord = "testing";
+        //System.out.println("\nRandom word is .... " + RandomChosenWord + " .. This line is for debugging purposes it wont show up once the game is ready to go.\n");
 
-        System.out.println("Now we are ready to play the game. "
-                + "You will have 6 attempts to choose the correct word.  " + "\n");
+        System.out.println("You will have 6 attempts to choose the correct word.  " + "\n");
 
         GuessWord guessW = new GuessWord(RandomChosenWord);
         guessW.Guessing();
 
-        System.out.print("Would you like to play again? Enter Y or N ");
-        playAgain = sc1.next();
+    }
 
+    //this function will let tell verify if we play again. it will check the input to make sure that the 
+    // is the correct answer
+    public static char playAgain(){
+        Scanner sc1 = new Scanner(System.in);
+        //char cPlay = c;
+        System.out.print("Would you like to play again? Enter Y or N. ");
+
+        String playAgain = sc1.next();
         playAgain = playAgain.toUpperCase();
         char cPlay = playAgain.charAt(0);
 
-        if (cPlay == 'Y') {
-
-            System.out.print("Please choose a topic: 1 for cars, 2 for presidents, 3 for a random topic."
-                    + "\nIf your input is invalid we will choose a word for you!  ");
-
-            choice1 = sc1.nextInt();
-            randW = new RandomWord(choice1);
-            randW.Display();
-            RandomChosenWord = randW.randomChoice();
-            System.out.println("\nRandom word is .... " + RandomChosenWord + " .. This line is for debugging purposes it wont show up once the game is ready to go.\n");
-
-            System.out.println("Now we are ready to play the game. "
-                    + "You will have 6 attempts to choose the correct word.  " + "\n");
-
-            guessW = new GuessWord(RandomChosenWord);
-            guessW.Guessing();
-
-            System.out.print("Would you like to play again? Enter Y or N ");
+        //this is the part of the function will verify the input of the and if it is correct it will break the loop and exist
+        while (cPlay != 89 || cPlay != 78) {
+            if (cPlay == 89 || cPlay == 78) {
+                cPlay = playAgain.charAt(0);
+                break;
+            }
+            System.out.println("That was not a valid input. Please try again");
             playAgain = sc1.next();
-
             playAgain = playAgain.toUpperCase();
             cPlay = playAgain.charAt(0);
-
+            //System.out.println(cPlay);
         }
-
-        System.out.println("Thank you for playing. This program has been closed gracefully.");
-
+        return cPlay;
     }
-
+    
+    
 }
