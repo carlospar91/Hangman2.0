@@ -18,7 +18,10 @@ public class GuessWord {
     int lettersLeft;
     char[] hidden;
     List<Character> alphabet = new ArrayList<>();
+    char letterOne;
+    Picture hangPic;
 
+    //constructor thtat will inizilize important variables used in this class
     public GuessWord(String word) {
         secretWord = word.toLowerCase();
         hidden = new char[secretWord.length()];
@@ -26,7 +29,7 @@ public class GuessWord {
     }
 
     public void Guessing() {
-        Picture hangPic = new Picture();
+        hangPic = new Picture();
         spaces();
         createAlphabet();
         printListChar();
@@ -39,22 +42,21 @@ public class GuessWord {
             hangPic.hangmanImage(secretWord, attempts);
             printListChar();
 
-                        System.out.print("Enter a letter to guess the word: ");
+            System.out.print("Enter a letter to guess the word: ");
             //User enters character
             Scanner scan2 = new Scanner(System.in);
             String letter = scan2.next();
-            
-            while (letter.length() > 1){ 
-            System.out.print(" Try again, invalid input: ");
-            //User enters character
-             scan2 = new Scanner(System.in);
-             letter = scan2.next();
-            }
-            
-            letter = letter.toLowerCase();
-            char letterOne = letter.charAt(0);
-            alreadyexisit = listChar(letterOne);
 
+            while (letter.length() > 1) {
+                System.out.print(" Try again, invalid input: ");
+                //User enters character
+                scan2 = new Scanner(System.in);
+                letter = scan2.next();
+            }
+
+            letter = letter.toLowerCase();
+            letterOne = letter.charAt(0);
+            alreadyexisit = listChar(letterOne);
 
             //verifies the the user inputs the correct value, This will not take in multiple values or non caracters, it will take in capital lettes
             while (letterOne < 97 || letterOne > 122 || letter.length() > 1 || alreadyexisit == false) {
@@ -67,35 +69,8 @@ public class GuessWord {
 
             }
 
-            boolean exsist = false;
-            for (int i = 0; i < secretWord.length(); i++) {
-                if (letterOne == secretWord.charAt(i)) {
-                    hidden[i] = letterOne;
-                    exsist = true;
-                    lettersLeft--;
-                }
-            }
+            verifyFinished();
 
-            if (exsist == false) {
-                attempts--;
-            }
-
-            boolean wordGUesseddd = true;
-            if (lettersLeft == 1 || lettersLeft == 2) {
-                for (int i = 0; i < secretWord.length(); i++) {
-                    if (hidden[i] == '*') {
-                        wordGUesseddd = false;
-                    }
-                }
-            }
-
-            if ((wordGUesseddd == true && (lettersLeft == 1)) || (wordGUesseddd == true && lettersLeft == 2) || lettersLeft == 0) {
-                lettersLeft = 0;
-                System.out.println("THis is the end.");
-                hangPic.hangmanImage(secretWord, attempts);
-                getHidden();
-                break;
-            }
         }
 
         hangPic.hangmanImage(secretWord, attempts);
@@ -134,7 +109,7 @@ public class GuessWord {
             alphabet.set(index, '#');
             ans = true;
         } else {
-            System.out.print(ch + "  has already been used!!!");
+            //System.out.print(ch + "  has already been used!!!");
             ans = false;
             //System.out.println("This guess already exisist!!");
 
@@ -145,7 +120,7 @@ public class GuessWord {
     public void printListChar() {
 
         System.out.println("These are the letters you have remaining to choose from:");
-        System.out.println(alphabet);
+        System.out.println("\n"+alphabet+"\n");
 
     }
 
@@ -192,17 +167,43 @@ public class GuessWord {
             result = input.charAt(0);
         }
 
-        System.out.println(result);       
+        System.out.println(result);
         return result;
 
     }
-    
-    
-    public void verifyFinished(){
-    
-    
-    
-    
+
+    public void verifyFinished() {
+
+        boolean exsist = false;
+        for (int i = 0; i < secretWord.length(); i++) {
+            if (letterOne == secretWord.charAt(i)) {
+                hidden[i] = letterOne;
+                exsist = true;
+                lettersLeft--;
+            }
+        }
+
+        if (exsist == false) {
+            attempts--;
+        }
+
+        boolean wordGUesseddd = true;
+        if (lettersLeft == 1 || lettersLeft == 2) {
+            for (int i = 0; i < secretWord.length(); i++) {
+                if (hidden[i] == '*') {
+                    wordGUesseddd = false;
+                }
+            }
+        }
+
+        if ((wordGUesseddd == true && (lettersLeft == 1)) || (wordGUesseddd == true && lettersLeft == 2) || lettersLeft == 0) {
+            lettersLeft = 0;
+            System.out.println("THis is the end.");
+            hangPic.hangmanImage(secretWord, attempts);
+            getHidden();
+            //break;
+        }
+
     }
 
 }
