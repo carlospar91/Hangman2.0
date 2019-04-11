@@ -6,204 +6,88 @@ import java.util.Scanner;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-/*
- * @author NicoleBritt
+/**
+ *
+ * @author CARLOSPARLOUR
  */
-public class GuessWord {
+public class HangmanProject {
 
-    String secretWord;
-    int attempts = 6;
-    int totalAttempt = 0;
-    int position = 0;
-    int lettersLeft;
-    char[] hidden;
-    List<Character> alphabet = new ArrayList<>();
-    char letterOne;
-    Picture hangPic;
-
-    //constructor thtat will inizilize important variables used in this class
-    public GuessWord(String word) {
-        secretWord = word.toLowerCase();
-        hidden = new char[secretWord.length()];
-        lettersLeft = secretWord.length();
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        letsPlay();
     }
 
-    public void Guessing() {
-        hangPic = new Picture();
-        spaces();
-        createAlphabet();
-        printListChar();
+    //this is the main protion of the game play this is where we verify the input of th
+    public static void letsPlay() {
 
-        while (attempts != 0 && lettersLeft != 0) {
-            boolean alreadyexisit = false;
-            totalAttempt++;
-            getHidden();
+        Scanner sc1 = new Scanner(System.in);
+        //initial value is set to Y so we can start the program. The while loop is used to see if the 
+        //player still wants to play
+        char cPlay = 'Y';
 
-            hangPic.hangmanImage(secretWord, attempts);
-            printListChar();
+        //while loop used to make sure the value 
+        while (cPlay == 'Y') {
+            int choice1 = 3;
+            System.out.print("Please choose a topic: 1 for cars, 2 for presidents, 3 for a random topic.");
 
-            System.out.print("Enter a letter to guess the word: ");
-            //User enters character
-            Scanner scan2 = new Scanner(System.in);
-            String letter = scan2.next();
-
-            while (letter.length() > 1) {
-                System.out.print(" Try again, invalid input: ");
-                //User enters character
-                scan2 = new Scanner(System.in);
-                letter = scan2.next();
+            try {
+                System.out.print(" Please input an integer: ");
+                //nextInt will throw InputMismatchException
+                choice1 = sc1.nextInt();
+            } catch (InputMismatchException exception) {
+                //when the player inputs an inccorect input
+                System.out.println("Your input was not an Integer so we picked a word for you!");
             }
 
-            letter = letter.toLowerCase();
-            letterOne = letter.charAt(0);
-            alreadyexisit = listChar(letterOne);
+            mainGamePlay(choice1);
+            cPlay = playAgain();
+        }
+        System.out.println("Thank you for playing. This program has been closed gracefully.");
+    }
 
-            //verifies the the user inputs the correct value, This will not take in multiple values or non caracters, it will take in capital lettes
-            while (letterOne < 97 || letterOne > 122 || letter.length() > 1 || alreadyexisit == false) {
-                totalAttempt++;
-                System.out.print("Your input was incorrect. Please Enter another letter : ");
-                letter = scan2.next();
-                letter = letter.toLowerCase();
-                letterOne = letter.charAt(0);
-                alreadyexisit = listChar(letterOne);
+    //this is the initial part of the program this it where we get the random word the player will need to guess. 
+    public static void mainGamePlay(int input) {
+        int choice1 = input;
+        RandomWord randW;
+        randW = new RandomWord(choice1);
+        randW.Display();
+        String RandomChosenWord = randW.randomChoice();
+        //String RandomChosenWord = "testing";
+        //System.out.println("\nRandom word is .... " + RandomChosenWord + " .. This line is for debugging purposes it wont show up once the game is ready to go.\n");
 
+        System.out.println("You will have 6 attempts to choose the correct word.  " + "\n");
+
+        GuessWord guessW = new GuessWord(RandomChosenWord);
+        guessW.Guessing();
+
+    }
+
+    //this function will let tell verify if we play again. it will check the input to make sure that the 
+    // is the correct answer
+    public static char playAgain() {
+        Scanner sc1 = new Scanner(System.in);
+        //char cPlay = c;
+        System.out.print("Would you like to play again? Enter Y or N. ");
+
+        String playAgain = sc1.next();
+        playAgain = playAgain.toUpperCase();
+        char cPlay = playAgain.charAt(0);
+
+        //this is the part of the function will verify the input of the and if it is correct it will break the loop and exist
+        while (cPlay != 89 || cPlay != 78) {
+            if (cPlay == 89 || cPlay == 78) {
+                cPlay = playAgain.charAt(0);
+                break;
             }
-
-            verifyFinished();
-
+            System.out.println("That was not a valid input. Please try again");
+            playAgain = sc1.next();
+            playAgain = playAgain.toUpperCase();
+            cPlay = playAgain.charAt(0);
+            //System.out.println(cPlay);
         }
-        System.out.println();
-        hangPic.hangmanImage(secretWord, attempts);
-        //printListChar();
-        //System.out.println("This is the total number of attempts taken>>> : >>" + totalAttempt);
-
-    }
-
-    //This method provides us with the array that will be used to display the words
-    public void spaces() {
-        for (int i = 0; i < secretWord.length(); i++) {
-            hidden[i] = '*';
-        }
-
-        for (int i = 0; i < secretWord.length(); i++) {
-            if (secretWord.charAt(i) == 32) {
-                hidden[i] = '_';
-            }
-        }
-    }
-
-    public void getHidden() {
-        for (int i = 0; i < secretWord.length(); i++) {
-            System.out.print(hidden[i] + " ");
-        }
-        System.out.println();
-    }
-
-    public boolean listChar(char ch) {
-        boolean ans = alphabet.contains(ch);
-        //System.out.print(ans);
-
-        int index = (ch - 97);
-        if (ans) {
-            System.out.println();
-            alphabet.set(index, '#');
-            ans = true;
-        } else {
-            //System.out.print(ch + "  has already been used!!!");
-            ans = false;
-            //System.out.println("This guess already exisist!!");
-
-        }
-        return ans;
-    }
-
-    public void printListChar() {
-
-        System.out.println("These are the letters you have remaining to choose from:");
-        System.out.println("\n"+alphabet+"\n");
-
-    }
-
-    public void createAlphabet() {
-        alphabet.add('a');
-        alphabet.add('b');
-        alphabet.add('c');
-        alphabet.add('d');
-        alphabet.add('e');
-        alphabet.add('f');
-        alphabet.add('g');
-        alphabet.add('h');
-        alphabet.add('i');
-        alphabet.add('j');
-        alphabet.add('k');
-        alphabet.add('l');
-        alphabet.add('m');
-        alphabet.add('n');
-        alphabet.add('o');
-        alphabet.add('p');
-        alphabet.add('q');
-        alphabet.add('r');
-        alphabet.add('s');
-        alphabet.add('t');
-        alphabet.add('u');
-        alphabet.add('v');
-        alphabet.add('w');
-        alphabet.add('x');
-        alphabet.add('y');
-        alphabet.add('z');
-    }
-
-    public char stringLen(String input) {
-        char result = input.charAt(0);
-        //String letter;
-        if (input.length() > 1) {
-            System.out.print("Enter ONlY 1 letter!!!  ");
-            Scanner scan2 = new Scanner(System.in);
-            input = scan2.next();
-            input = input.toLowerCase();
-            stringLen(input);
-            //stringLen(letter);
-        } else if (input.length() == 1) {
-            result = input.charAt(0);
-        }
-
-        System.out.println(result);
-        return result;
-
-    }
-
-    public void verifyFinished() {
-
-        boolean exsist = false;
-        for (int i = 0; i < secretWord.length(); i++) {
-            if (letterOne == secretWord.charAt(i)) {
-                hidden[i] = letterOne;
-                exsist = true;
-                lettersLeft--;
-            }
-        }
-
-        if (exsist == false) {
-            attempts--;
-        }
-
-        boolean wordGUesseddd = true;
-        if (lettersLeft == 1 || lettersLeft == 2) {
-            for (int i = 0; i < secretWord.length(); i++) {
-                if (hidden[i] == '*') {
-                    wordGUesseddd = false;
-                }
-            }
-        }
-
-        if ((wordGUesseddd == true && (lettersLeft == 1)) || (wordGUesseddd == true && lettersLeft == 2) || lettersLeft == 0) {
-            lettersLeft = 0;
-            System.out.println("Great job you guessed the right word!");
-            //hangPic.hangmanImage(secretWord, attempts);
-            getHidden();
-            //break;
-        }
-
+        return cPlay;
     }
 
 }
