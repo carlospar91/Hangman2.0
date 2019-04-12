@@ -1,3 +1,9 @@
+/**
+ *
+ * @author CARLOSPARLOUR, LUIS MORENO, NICOLE BRITT
+ */
+
+
 package hangmanproject;
 
 public class Picture {
@@ -10,12 +16,13 @@ public class Picture {
     }
 
     //This methhod will take in the secret word and the number of remaining guesses and display the correct picture
+    // 04.5.19 - Luis Moreno
     public void hangmanImage(String word, int remainingGuesses) {
         attempts = remainingGuesses;
 
         switch (attempts) {
             case 6:
-                //This is the start of the game. 
+                //This is the start of the game.  04.5.19 - Luis Moreno
                 System.out.println();
                 System.out.println("   |");
                 System.out.println("   |");
@@ -28,7 +35,7 @@ public class Picture {
                 System.out.println();
                 break;
             case 5:
-                //one incorrect guess
+                //one incorrect guess 04.5.19 - Luis Moreno
                 System.out.println();
                 System.out.println("5 guesses left");
                 System.out.println("   ____________");
@@ -42,7 +49,7 @@ public class Picture {
                 System.out.println("___|___\n");
                 break;
             case 4:
-                //two incorrect guess
+                //two incorrect guess 04.5.19 - Luis Moreno
                 System.out.println();
                 System.out.println("4 guesses left");
                 System.out.println("   ____________");
@@ -56,7 +63,7 @@ public class Picture {
                 System.out.println("___|___\n");
                 break;
             case 3:
-                //3 incorrect guess
+                //3 incorrect guess 04.5.19 - Luis Moreno
                 System.out.println();
                 System.out.println("3 guesses left");
                 System.out.println("   ____________");
@@ -70,7 +77,7 @@ public class Picture {
                 System.out.println("___|___\n");
                 break;
             case 2:
-                //four incorrect guess
+                //four incorrect guess 04.5.19 - Luis Moreno
                 System.out.println();
                 System.out.println("2 guesses left");
                 System.out.println("   ____________");
@@ -84,7 +91,7 @@ public class Picture {
                 System.out.println("___|___\n");
                 break;
             case 1:
-                //five incorrect guess
+                //five incorrect guess 04.5.19 - Luis Moreno
                 System.out.println();
                 System.out.println("1 guesses left");
                 System.out.println("   ____________");
@@ -99,7 +106,7 @@ public class Picture {
                 break;
             case 0:
                 //six incorrect guess and the game is now over. This will display the correct word at the end 
-                //System.out.println("");
+                //System.out.println(""); 04.5.19 - Luis Moreno
                 System.out.println("   ____________");
                 System.out.println("   |          _|_");
                 System.out.println("   |         /   \\");
