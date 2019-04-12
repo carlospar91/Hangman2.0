@@ -14,14 +14,12 @@ import java.io.FileNotFoundException;
 //04.11.19 - Carlos Parlour
 public class HangmanProject {
 
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String[] args) {
         letsPlay();
     }
 
-    //this is the main protion of the game play this is where we verify the input of the of user. 04.11.19 - Carlos Parlour
+    //04.11.19 - Carlos Parlour: This is the main portion of the game play this is where we verify the input of the user. 
     public static void letsPlay() {
 
         Scanner sc1 = new Scanner(System.in);
@@ -49,15 +47,15 @@ public class HangmanProject {
         System.out.println("Thank you for playing. This program has been closed gracefully.");
     }
 
-    //this is the initial part of the program this it where we get the random word the player will need to guess. 04.10.19 - Carlos Parlour
+    //04.10.19 - Carlos Parlour: This is the initial part of the program this it where we get the random word the player will need to guess. 
     public static void mainGamePlay(int input) {
         int choice1 = input;
         RandomWord randW;
         randW = new RandomWord(choice1);
         randW.Display();
         String RandomChosenWord = randW.randomChoice();
-        //String RandomChosenWord = "testing"; 04.10.19 Luis Moreno
-        //System.out.println("\nRandom word is .... " + RandomChosenWord + " .. This line is for debugging purposes it wont show up once the game is ready to go.\n");
+        // 04.10.19 Luis Moreno: String RandomChosenWord = "testing";
+        // 04.10.19 Luis Moreno: System.out.println("\nRandom word is .... " + RandomChosenWord + " .. This line is for debugging purposes it wont show up once the game is ready to go.\n");
 
         System.out.println("You will have 6 attempts to choose the correct word.  " + "\n");
 
@@ -66,8 +64,8 @@ public class HangmanProject {
 
     }
 
-    //this function will let tell verify if we play again. it will check the input to make sure that the 
-    // is the correct answer. 04.10.19 - Carlos Parlour
+    //04.10.19 - Carlos Parlour: this function will let tell verify if we play again. it will check the input to make sure that the 
+    //04.10.19 - Carlos Parlour: is the correct answer. 
     public static char playAgain() {
         Scanner sc1 = new Scanner(System.in);
         //char cPlay = c;
@@ -77,7 +75,7 @@ public class HangmanProject {
         playAgain = playAgain.toUpperCase();
         char cPlay = playAgain.charAt(0);
 
-        //this is the part of the function will verify the input of the and if it is correct it will break the loop and exist. 04.10.19 Luis Moreno
+        //04.10.19 Luis Moreno: This is the part of the function will verify the input of the and if it is correct it will break the loop and exist. 
         while (cPlay != 89 || cPlay != 78) {
             if (cPlay == 89 || cPlay == 78) {
                 cPlay = playAgain.charAt(0);
