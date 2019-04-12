@@ -14,7 +14,8 @@ import java.io.FileNotFoundException;
 /**
  *
  * @author CARLOSPARLOUR 04.5.19 - Carlos Parlour
- */
+ */ 
+
 public class RandomWord {
 
     //this declares all the variables used in the class
@@ -27,8 +28,8 @@ public class RandomWord {
         myStringArray = new String[55000];
     }
 
-    //This is Method will take in the input of the user and it will find the location of the file 
-    //it will set word to the location of the file so the program can open the correct one. 04.5.19 - Carlos Parlour
+    //04.5.19 - Carlos Parlour: This is Method will take in the input of the user and it will find the location of the file 
+    //04.5.19 - Carlos Parlour: It will set word to the location of the file so the program can open the correct one. 
     public void Display() {
 
         switch (choice) {
@@ -72,7 +73,7 @@ public class RandomWord {
         }
     }
 
-    //this is the function that will randomly choose a word. 04.5.19 - Carlos Parlour
+    //04.5.19 - Carlos Parlour: This is the function that will randomly choose a word. 
     public String randomChoice() {
         String rand_word = myStringArray[(int) (Math.random() * myStringArray.length)];
         while (rand_word == null) {
