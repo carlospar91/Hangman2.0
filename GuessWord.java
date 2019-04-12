@@ -1,3 +1,9 @@
+/**
+ *
+ * @author CARLOSPARLOUR, LUIS MORENO, NICOLE BRITT
+ */
+
+
 package hangmanproject;
 
 import java.util.*;
@@ -7,7 +13,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 /*
- * @author NicoleBritt
+ * @ 04.2.19 NicoleBritt
  */
 public class GuessWord {
 
@@ -21,13 +27,14 @@ public class GuessWord {
     char letterOne;
     Picture hangPic;
 
-    //constructor thtat will inizilize important variables used in this class
+    //constructor thtat will inizilize important variables used in this class04.2.19 NicoleBritt
     public GuessWord(String word) {
         secretWord = word.toLowerCase();
         hidden = new char[secretWord.length()];
         lettersLeft = secretWord.length();
     }
 
+    //this method is used to get the letters and check to see if they have been guessed. 04.10.19 NicoleBritt
     public void Guessing() {
         hangPic = new Picture();
         spaces();
@@ -74,7 +81,7 @@ public class GuessWord {
             verifyFinished();
 
         }
-        //System.out.println(attempts);
+        //Used to print the final image 04.11.19 Luis Moreno
         if (attempts == 0) {
             hangPic.hangmanImage(secretWord, attempts);
         }//printListChar();
@@ -83,7 +90,7 @@ public class GuessWord {
     }
 
     //This method will only be called ONCE and is used to hide the secretword.
-    //It will turn chars/letters into '*' and spaces into '_'
+    //It will turn chars/letters into '*' and spaces into '_'. 04.10.19 NicoleBritt
     public void spaces() {
         for (int i = 0; i < secretWord.length(); i++) {
             hidden[i] = '*';
@@ -96,7 +103,7 @@ public class GuessWord {
         }
     }
 
-    //This is used to print out the char array this is the secret word 
+    //This is used to print out the char array this is the secret word. 04.10.19 NicoleBritt
     public void getHidden() {
         for (int i = 0; i < secretWord.length(); i++) {
             System.out.print(hidden[i] + " ");
@@ -104,7 +111,7 @@ public class GuessWord {
         System.out.println();
     }
 
-    //This is used to check if the letter has been guessed. 
+    //This is used to check if the letter has been guessed. 04.10.19 Nicole Britt
     public boolean listChar(char ch) {
         boolean ans = alphabet.contains(ch);
         //System.out.print(ans);
@@ -113,12 +120,12 @@ public class GuessWord {
         //if the lette exist in alphabet then the letter has not been guessed
         if (ans) {
             System.out.println();
-            //since the letter has not been guess, we will replace it with # to signify it has been guessed
+            //since the letter has not been guess, we will replace it with # to signify it has been guessed. 04.11.19 Luis Moreno
             alphabet.set(index, '#');
             ans = true;
         } else {
             //if the letter does not exist then it has allready been guessed
-            //System.out.print(ch + "  has already been used!!!");
+            //System.out.print(ch + "  has already been used!!!"); 04.11.19 Luis Moreno
             ans = false;
             //System.out.println("This guess already exisist!!");
 
@@ -126,7 +133,7 @@ public class GuessWord {
         return ans;
     }
 
-    //this will print a CURRENT UPDATED list of all the letters that havent bee guessed
+    //this will print a CURRENT UPDATED list of all the letters that havent bee guessed.  04.10.19 NicoleBritt
     public void printListChar() {
 
         System.out.println("These are the letters you have remaining to choose from:");
@@ -134,7 +141,7 @@ public class GuessWord {
 
     }
 
-    //this creates the Arraylist of char's for the alphabet and will be called in the constructor
+    //this creates the Arraylist of char's for the alphabet and will be called in the constructor. 04.11.19 Luis Moreno
     public void createAlphabet() {
         alphabet.add('a');
         alphabet.add('b');
@@ -164,7 +171,7 @@ public class GuessWord {
         alphabet.add('z');
     }
 
-    //this is used to make sure the inputs is only 1 char. 
+    //this is used to make sure the inputs is only 1 char.  04.10.19 NicoleBritt
     public char stringLen(String input) {
         char result = input.charAt(0);
         //String letter;
@@ -184,7 +191,7 @@ public class GuessWord {
 
     }
 
-    //this method is used to check if all of the letters are guessed in the word.
+    //this method is used to check if all of the letters are guessed in the word. 04.10.19 Nicole Britt
     public void verifyFinished() {
 
         //this loop will go throught the secret word and check to see if the guessed letter exists in the secret word
@@ -197,14 +204,14 @@ public class GuessWord {
             }
         }
 
-        //if the letter does not exist this will update the number of guesses remaining
+        //if the letter does not exist this will update the number of guesses remaining. 04.11.19 Luis Moreno
         if (exsist == false) {
             System.out.println("Wrong guess, here is your penality");
             attempts--;
         }
 
         //this will check to see if there is any more '*'. if there isnt then it means the word has been guessed.
-        //this is here because some words have spaces and it will ignore the spaces 
+        //this is here because some words have spaces and it will ignore the spaces. 04.11.19 Luis Moreno 
         boolean wordGUesseddd = true;
         if (lettersLeft == 1 || lettersLeft == 2) {
             for (int i = 0; i < secretWord.length(); i++) {
@@ -214,7 +221,7 @@ public class GuessWord {
             }
         }
 
-        //this takes all of the conditions from above and if all of them are true then the word has been correctly guessed. 
+        //this takes all of the conditions from above and if all of them are true then the word has been correctly guessed.  04.10.19 Carlos Parlour
         if ((wordGUesseddd == true && (lettersLeft == 1)) || (wordGUesseddd == true && lettersLeft == 2) || lettersLeft == 0) {
             lettersLeft = 0;
             System.out.println("Great job you guessed the right word! The secret word is " + secretWord);
