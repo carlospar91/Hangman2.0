@@ -1,8 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author CARLOSPARLOUR, LUIS MORENO, NICOLE BRITT
  */
+
 package hangmanproject;
 
 import java.util.*;
@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 
 /**
  *
- * @author CARLOSPARLOUR
+ * @author CARLOSPARLOUR 04.5.19 - Carlos Parlour
  */
 public class RandomWord {
 
@@ -28,7 +28,7 @@ public class RandomWord {
     }
 
     //This is Method will take in the input of the user and it will find the location of the file 
-    //it will set word to the location of the file so the program can open the correct one
+    //it will set word to the location of the file so the program can open the correct one. 04.5.19 - Carlos Parlour
     public void Display() {
 
         switch (choice) {
@@ -72,7 +72,7 @@ public class RandomWord {
         }
     }
 
-    //this is the function that will randomly choose a word
+    //this is the function that will randomly choose a word. 04.5.19 - Carlos Parlour
     public String randomChoice() {
         String rand_word = myStringArray[(int) (Math.random() * myStringArray.length)];
         while (rand_word == null) {
