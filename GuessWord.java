@@ -27,27 +27,27 @@ public class GuessWord {
     char letterOne;
     Picture hangPic;
 
-    //constructor thtat will inizilize important variables used in this class04.2.19 NicoleBritt
+    //04.2.19 NicoleBritt: Constructor that will initialize important variables used in this class
     public GuessWord(String word) {
         secretWord = word.toLowerCase();
         hidden = new char[secretWord.length()];
         lettersLeft = secretWord.length();
     }
 
-    //this method is used to get the letters and check to see if they have been guessed. 04.10.19 NicoleBritt
+    //04.10.19 NicoleBritt: This method is used to get the letters and check to see if they have been guessed. 
     public void Guessing() {
         hangPic = new Picture();
         spaces();
         createAlphabet();
         printListChar();
 
-        //while loop used to keep the guess going
+        //04.10.19 NicoleBritt: While loop used to keep the guess going
         while (attempts != 0 && lettersLeft != 0) {
             boolean alreadyexisit = false;
             totalAttempt++;
             getHidden();
 
-            //displays the picture and then the current the remaining letters you can guess
+            //04.10.19 NicoleBritt: Displays the picture and then the current the remaining letters you can guess
             hangPic.hangmanImage(secretWord, attempts);
             printListChar();
 
@@ -55,7 +55,7 @@ public class GuessWord {
             Scanner scan2 = new Scanner(System.in);
             String letter = scan2.next();
 
-            //This will not allow the user to input something larger than length 1
+            //04.10.19 NicoleBritt: This will not allow the user to input something larger than length 1
             while (letter.length() > 1) {
                 System.out.print("Try again, invalid input: ");
                 //User enters character
@@ -67,7 +67,7 @@ public class GuessWord {
             letterOne = letter.charAt(0);
             alreadyexisit = listChar(letterOne);
 
-            //verifies the the user inputs the correct value, This will not take in multiple values or non caracters, it will take in capital lettes
+            //04.10.19 NicoleBritt: verifies the the user inputs the correct value, This will not take in multiple values or non caracters, it will take in capital lettes
             while (letterOne < 97 || letterOne > 122 || letter.length() > 1 || alreadyexisit == false) {
                 totalAttempt++;
                 System.out.print("Your input was incorrect. Please Enter another letter : ");
@@ -81,7 +81,7 @@ public class GuessWord {
             verifyFinished();
 
         }
-        //Used to print the final image 04.11.19 Luis Moreno
+        //04.10.19 NicoleBritt: Used to print the final image 04.11.19 Luis Moreno
         if (attempts == 0) {
             hangPic.hangmanImage(secretWord, attempts);
         }//printListChar();
@@ -89,8 +89,8 @@ public class GuessWord {
 
     }
 
-    //This method will only be called ONCE and is used to hide the secretword.
-    //It will turn chars/letters into '*' and spaces into '_'. 04.10.19 NicoleBritt
+    //04.10.19 NicoleBritt: This method will only be called ONCE and is used to hide the secretword.
+    //04.10.19 NicoleBritt: It will turn chars/letters into '*' and spaces into '_'.
     public void spaces() {
         for (int i = 0; i < secretWord.length(); i++) {
             hidden[i] = '*';
@@ -103,7 +103,7 @@ public class GuessWord {
         }
     }
 
-    //This is used to print out the char array this is the secret word. 04.10.19 NicoleBritt
+    //04.10.19 NicoleBritt: This is used to print out the char array this is the secret word.
     public void getHidden() {
         for (int i = 0; i < secretWord.length(); i++) {
             System.out.print(hidden[i] + " ");
@@ -111,21 +111,23 @@ public class GuessWord {
         System.out.println();
     }
 
-    //This is used to check if the letter has been guessed. 04.10.19 Nicole Britt
+    //04.10.19 NicoleBritt: This is used to check if the letter has been guessed.
     public boolean listChar(char ch) {
         boolean ans = alphabet.contains(ch);
         //System.out.print(ans);
 
         int index = (ch - 97);
-        //if the lette exist in alphabet then the letter has not been guessed
+        //04.10.19 NicoleBritt: If the letter exist in alphabet then the letter has not been guessed
         if (ans) {
             System.out.println();
-            //since the letter has not been guess, we will replace it with # to signify it has been guessed. 04.11.19 Luis Moreno
+
+            // 04.11.19 Luis Moreno: Since the letter has not been guess, we will replace it with # to signify it has been guessed.
             alphabet.set(index, '#');
             ans = true;
         } else {
-            //if the letter does not exist then it has allready been guessed
-            //System.out.print(ch + "  has already been used!!!"); 04.11.19 Luis Moreno
+
+            //04.10.19 NicoleBritt: If the letter does not exist then it has already been guessed
+            //04.11.19 Luis Moreno: System.out.print(ch + "  has already been used!!!"); 
             ans = false;
             //System.out.println("This guess already exisist!!");
 
@@ -133,7 +135,7 @@ public class GuessWord {
         return ans;
     }
 
-    //this will print a CURRENT UPDATED list of all the letters that havent bee guessed.  04.10.19 NicoleBritt
+    //04.10.19 NicoleBritt: this will print a CURRENT UPDATED list of all the letters that haven't bee guessed.  
     public void printListChar() {
 
         System.out.println("These are the letters you have remaining to choose from:");
@@ -141,7 +143,7 @@ public class GuessWord {
 
     }
 
-    //this creates the Arraylist of char's for the alphabet and will be called in the constructor. 04.11.19 Luis Moreno
+    //04.11.19 Luis Moreno: This creates the Arraylist of char's for the alphabet and will be called in the constructor. 
     public void createAlphabet() {
         alphabet.add('a');
         alphabet.add('b');
@@ -171,7 +173,7 @@ public class GuessWord {
         alphabet.add('z');
     }
 
-    //this is used to make sure the inputs is only 1 char.  04.10.19 NicoleBritt
+    // 04.10.19 NicoleBritt: This is used to make sure the inputs is only 1 char. 
     public char stringLen(String input) {
         char result = input.charAt(0);
         //String letter;
@@ -191,10 +193,10 @@ public class GuessWord {
 
     }
 
-    //this method is used to check if all of the letters are guessed in the word. 04.10.19 Nicole Britt
+    // 04.10.19 NicoleBritt: This method is used to check if all of the letters are guessed in the word.
     public void verifyFinished() {
 
-        //this loop will go throught the secret word and check to see if the guessed letter exists in the secret word
+        // 04.10.19 NicoleBritt: This loop will go through the secret word and check to see if the guessed letter exists in the secret word
         boolean exsist = false;
         for (int i = 0; i < secretWord.length(); i++) {
             if (letterOne == secretWord.charAt(i)) {
@@ -206,12 +208,14 @@ public class GuessWord {
 
         //if the letter does not exist this will update the number of guesses remaining. 04.11.19 Luis Moreno
         if (exsist == false) {
-            System.out.println("Wrong guess, here is your penality");
+            System.out.println("Wrong guess, here is your penalty");
             attempts--;
         }
 
-        //this will check to see if there is any more '*'. if there isnt then it means the word has been guessed.
-        //this is here because some words have spaces and it will ignore the spaces. 04.11.19 Luis Moreno 
+        //04.11.19 Luis Moreno: This will check to see if there is any more '*'. if there isn't then it means the word has been guessed.
+        //04.11.19 Luis Moreno: This is here because some words have spaces and it will ignore the spaces. 
+
+ 
         boolean wordGUesseddd = true;
         if (lettersLeft == 1 || lettersLeft == 2) {
             for (int i = 0; i < secretWord.length(); i++) {
@@ -221,7 +225,7 @@ public class GuessWord {
             }
         }
 
-        //this takes all of the conditions from above and if all of them are true then the word has been correctly guessed.  04.10.19 Carlos Parlour
+        //  04.10.19 Carlos Parlour: This takes all of the conditions from above and if all of them are true then the word has been correctly guessed.
         if ((wordGUesseddd == true && (lettersLeft == 1)) || (wordGUesseddd == true && lettersLeft == 2) || lettersLeft == 0) {
             lettersLeft = 0;
             System.out.println("Great job you guessed the right word! The secret word is " + secretWord);
